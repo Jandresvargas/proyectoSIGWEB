@@ -1,5 +1,5 @@
 /*! CSS Used from: https://www.motopro.ae/css/style.css */
-/*! @import https://www.motopro.ae/css/bootstrap.min.css */
+@import https://www.motopro.ae/css/bootstrap.min.css
 a{background-color:transparent;}
 a:active,a:hover{outline:0;}
 img{border:0;}
