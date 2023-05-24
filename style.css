@@ -1,0 +1,125 @@
+/*! CSS Used from: https://www.motopro.ae/css/style.css */
+/*! @import https://www.motopro.ae/css/bootstrap.min.css */
+a{background-color:transparent;}
+a:active,a:hover{outline:0;}
+img{border:0;}
+@media print{
+*,:after,:before{color:#000!important;text-shadow:none!important;background:0 0!important;-webkit-box-shadow:none!important;box-shadow:none!important;}
+a,a:visited{text-decoration:underline;}
+a[href]:after{content:" (" attr(href) ")";}
+img{page-break-inside:avoid;}
+img{max-width:100%!important;}
+}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+a{color:#337ab7;text-decoration:none;}
+a:focus,a:hover{color:#23527c;text-decoration:underline;}
+a:focus{outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
+img{vertical-align:middle;}
+h4{font-family:inherit;font-weight:500;line-height:1.1;color:inherit;}
+h4{margin-top:10px;margin-bottom:10px;}
+h4{font-size:18px;}
+.text-primary{color:#337ab7;}
+a.text-primary:focus,a.text-primary:hover{color:#286090;}
+.container-fluid{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+.row{margin-right:-15px;margin-left:-15px;}
+.col-lg-2,.col-md-2,.col-sm-6,.col-xs-6{position:relative;min-height:1px;padding-right:15px;padding-left:15px;}
+.col-xs-6{float:left;}
+.col-xs-6{width:50%;}
+@media (min-width:768px){
+.col-sm-6{float:left;}
+.col-sm-6{width:50%;}
+}
+@media (min-width:992px){
+.col-md-2{float:left;}
+.col-md-2{width:16.66666667%;}
+}
+@media (min-width:1200px){
+.col-lg-2{float:left;}
+.col-lg-2{width:16.66666667%;}
+}
+.container-fluid:after,.container-fluid:before,.row:after,.row:before{display:table;content:" ";}
+.container-fluid:after,.row:after{clear:both;}
+/*! end @import */
+a{color:#000;outline:0 none;text-decoration:none;}
+a:focus,a:hover{text-decoration:none;outline:0 none;}
+a:active,a:focus,a:hover{color:#d72323;}
+img{border-style:none;height:auto;max-width:100%;vertical-align:middle;}
+::selection{background:#484848;color:#fff;}
+::-moz-selection{background:#484848;color:#fff;}
+::-webkit-selection{background:#484848;color:#fff;}
+@media only screen and (max-width:600px){
+.col-xs-100pc{width:100%;}
+}
+h4{margin-bottom:24px;}
+h4{font-size:20px;line-height:26px;color:#232e35;margin-bottom:15px;font-family:Asap-Medium;font-weight:400;text-transform:uppercase;}
+.m-t20{margin-top:20px;}
+.m-b10{margin-bottom:10px;}
+.m-b15{margin-bottom:15px;}
+.m-b20{margin-bottom:20px;}
+.text-white{color:#fff;}
+.text-primary{color:#232e35;}
+.bg-black{background-color:#000;}
+.overlay-wraper{position:relative;}
+.overlay-main{position:absolute;left:0;top:0;width:100%;height:100%;}
+.opacity-06{opacity:.6;}
+.overlay-wraper>.container-fluid{position:relative;z-index:1;}
+.icon-lg{display:inline-block;text-align:center;}
+.icon-lg{width:80px;}
+.icon-lg img{vertical-align:middle;max-width:100%;width:auto;}
+.icon-lg img{height:70px;}
+.wt-icon-box-wraper{position:relative;}
+.wt-icon-box-wraper .wt-tilte{margin-top:0;font-size:16px;}
+.icon-content{overflow:hidden;}
+.wt-icon-box-wraper.center{text-align:center;}
+.wt-tilte{position:relative;}
+.site-button-link{display:inline-block;position:relative;font-family:Asap-Regular;text-transform:uppercase;}
+@media only screen and (max-width:480px){
+.bg-change-content.container-fluid{margin-top:18%;}
+}
+.section-full{position:relative;}
+.text-white{color:#fff;}
+.text-white h4{color:#fff;}
+@media only screen and (max-width:1024px){
+.section-full{background-attachment:scroll!important;}
+}
+a{-webkit-transition:all .2s linear;-moz-transition:all .2s linear;-ms-transition:all .2s linear;-o-transition:all .2s linear;transition:all .2s linear;}
+.wt-icon-box-wraper::after{content:"";display:table;clear:both;}
+.site-button-link{position:relative;}
+.site-button-link:before{position:absolute;content:"\f178";font-family:FontAwesome;left:50%;top:0;-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;-ms-transition:all .5s ease-in-out;-o-transition:all .5s ease-in-out;transition:all .5s ease-in-out;opacity:0;}
+.site-button-link:hover:before{left:110%;opacity:1;}
+.bg-change-section{position:relative;}
+.bg-change-section .overlay-main{z-index:1;}
+.bg-changer{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;z-index:0;}
+.section-bg{position:absolute;left:0;top:0;width:100%;height:100%;background-size:cover;background-position:center;z-index:-1;}
+.bg-changer .section-bg:first-child{opacity:1;}
+.bg-changer .section-bg{opacity:0;will-change:opacity,transform;-webkit-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1);-webkit-transition:opacity .5s .2s ease,transform 5s .2s ease;-o-transition:opacity .5s .2s ease,transform 5s .2s ease;transition:opacity .5s .2s ease,transform 5s .2s ease;}
+.bg-changer .section-bg.active{opacity:1;-webkit-transform:scale(1.05);-ms-transform:scale(1.05);-o-transform:scale(1.05);transform:scale(1.05);}
+.bg-change-content{display:table;width:100%;}
+.bg-change-content [class*=col-]{display:table-cell;vertical-align:middle;height:500px;float:none;width:1%;padding:0 20px;overflow:hidden;}
+.bgcall-block{cursor:pointer;border-right:1px solid rgba(242,242,242,.3);}
+.bg-overlay{background:rgba(0,0,0,.6);z-index:-1;position:absolute;left:0;top:0;width:100%;height:100%;-webkit-transition:all .3s ease;-o-transition:all .3s ease;-moz-transition:all .3s ease;transition:all .3s ease;-webkit-transform:scaleX(0);-moz-transform:scaleX(0);-ms-transform:scaleX(0);-o-transform:scaleX(0);transform:scaleX(0);}
+.bgcall-block:hover .bg-overlay{-webkit-transform:scaleX(1);-moz-transform:scaleX(1);-ms-transform:scaleX(1);-o-transform:scaleX(1);transform:scaleX(1);}
+.bgcall-block .site-button-link:hover{color:#fff;}
+@media only screen and (max-width:1200px){
+.bg-change-content [class*=col-]{width:33.33%;display:inherit;float:left;height:350px;}
+.bg-content-mid-outer{display:table;width:100%;height:100%;}
+.bg-content-mid{display:table-cell;vertical-align:middle;}
+.bgcall-block{cursor:pointer;border-right:1px solid rgba(242,242,242,.3);border-bottom:1px solid rgba(242,242,242,.3);}
+}
+@media only screen and (max-width:640px){
+.bg-change-content [class*=col-]{width:50%;height:250px;}
+}
+@media only screen and (max-width:360px){
+.bg-change-content [class*=col-]{width:100%;}
+}
+::selection{background:#f26738;}
+::-moz-selection{background:#f26738;}
+::-webkit-selection{background:#f26738;}
+.site-button-link::after{background-color:#f26738;}
+.site-button-link::after,.text-primary{color:#f26738;}
+a:active,a:focus,a:hover{color:#232e35;}
+/*! CSS Used fontfaces */
+@font-face{font-family:'Asap-Medium';src:url(https://www.motopro.ae/webfont/Asap-Medium.eot#iefix) format('embedded-opentype'),           url(https://www.motopro.ae/webfont/Asap-Medium.ttf)  format('truetype');}
+@font-face{font-family:'Asap-Regular';src:url(https://www.motopro.ae/Asap-Regular.eot);src:local('webfont/Asap-Regular'), url(https://www.motopro.ae/webfont/Asap-Regular.woff) format('woff'), url(https://www.motopro.ae/webfont/Asap-Regular.ttf) format('truetype');}
+@font-face{font-family:'FontAwesome';src:url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.eot?v=4.7.0');src:url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.eot#iefix&v=4.7.0') format('embedded-opentype'), url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('https://www.motopro.ae/css/fontawesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal;}
