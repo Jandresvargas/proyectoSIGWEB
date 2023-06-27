@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Descripcion de la pagina -->
+    <meta name="description" content="Esta es la biografía de Andrés Vargas">
+    <meta name="viewport" content ="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jorge Andres Vargas">
+
+    <!-- CDNS -->
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+    <!-- iconos redes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Ingresar</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="css/principal.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Plugin jQuery-->
+        <script src="js/principal.js"></script>   
+  </head>
+  <style>
+    #map {
+	        display: absolute;
+            height:100%;
+            border-radius: 2rem;
+            
+        }
+  </style>
+  
+  <body>
+
+    <div class="app-container">
+      <div class="left-area">
+        <button class="btn-close-left">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-x-circle" viewBox="0 0 24 24">
+            <defs/>
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+        </button>
+        <div class="app-name">SIG</div>
+        <a href="principal.html" class="item-link" id="pageLink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-grid" viewBox="0 0 24 24">
+            <defs />
+            <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
+          </svg>
+        </a>
+        <a href="principal.html" class="item-link" id="pageLink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-folder" viewBox="0 0 24 24">
+            <defs />
+            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+          </svg>
+        </a>
+        <a class="item-link  active" id="pageLink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-hard-drive" viewBox="0 0 24 24">
+            <defs />
+            <path d="M22 12H2M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11zM6 16h.01M10 16h.01" />
+          </svg>
+        </a>
+        <a href="principal.html" class="item-link" id="pageLink">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
+            <defs />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+          </svg>
+        </a>
+        <a href="f2.html">
+          <button class="btn-logout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-log-out" viewBox="0 0 24 24">
+              <defs/>
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+            </svg>
+          </button>
+      </a>
+      </div>
+      <div class="main-area">
+        <button class="btn-show-right-area">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="btn-show-left-area">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <section class="content-section">
+           <div class="section-header-wrapper">
+             <h1 class="section-header">Manual</h1>
+             <a class="section-header-link">
+               A continuación encontrarás el manual para un mejor entendimiento del visor
+               <br>
+              </a>
+             
+           </div>
+          <div class="content-section-line">
+            <embed src="manual.pdf" type="application/pdf" width="100%" height="600px" />
+          </div>
+
+        </section>
+      </div>
+      <div class="right-area">
+        <button class="btn-close-right">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-x-circle" viewBox="0 0 24 24">
+            <defs/>
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+        </button>
+        <div class="download-item-line">
+          <p class="right-area-header" style="font-size: 20px;">Enlaces de interés</p>
+          <div class="line-header">Presentación</div>
+          <div class="download-area">
+            <div class="download-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="">
+                <defs></defs>
+                <a xlink:href="presentacion.html">
+                  <circle cx="256" cy="256" r="256" fill="#4b50dd"></circle>
+                  <path fill="#f5f5f5" d="M192 64h176c4.4 0 8 3.6 8 8v328c0 4.4-3.6 8-8 8H120c-4.4 0-8-3.6-8-8V148l80-84z"></path>
+                  <path fill="#e6e6e6" d="M184 148c4.4 0 8-3.6 8-8V64l-80 84h72z"></path>
+                  <circle cx="352" cy="384" r="52" fill="#2179a6"></circle>
+                  <g fill="#f5f5f5" class="g">
+                    <path d="M352 416c-2.208 0-4-1.788-4-4v-56c0-2.212 1.792-4 4-4s4 1.788 4 4v56c0 2.212-1.792 4-4 4z"></path>
+                    <path d="M352 416a3.989 3.989 0 01-2.828-1.172l-20-20c-1.564-1.564-1.564-4.092 0-5.656s4.092-1.564 5.656 0L352 406.344l17.172-17.172c1.564-1.564 4.092-1.564 5.656 0s1.564 4.092 0 5.656l-20 20A3.989 3.989 0 01352 416z"></path>
+                  </g>
+                </a>
+              </svg>
+            </div>
+            <div class="download-item-texts">
+              <p class="download-text-header" style="font-size: 15px;">Presentación</p>
+              <p class="download-text-info" >Clic en el icono para ir a la presentación</p>
+            </div>
+
+          </div>
+          <div class="line-header">Diseño base<br></div>
+          <div class="download-area">
+            <a href="https://codepen.io/aybukeceylan/pen/yLOxRyG" target="_blank" class="text-white mr-3"><i class="fa fa-eye fs-1"></i></a>
+            <div class="download-item-texts">
+              <p class="download-text-header" style="font-size: 15px;">CodePen</p>
+              <p class="download-text-info">File Sharing Web App</p>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="right-area-header-wrapper">
+          <p class="right-area-header" style="font-size: 20px;">Contacto</p>
+        </div>
+        <div class="line-header">Camila Carmona<br></div>
+        <div class="download-area">
+            <a href="https://www.facebook.com/camila.carmonasalazar" target="_blank" class="text-white mr-3"><i class="fab fa-facebook fs-1"></i></a>
+            <a href="https://twitter.com/scarmonacamila" target="_blank" class="text-white mr-3"><i class="fab fa-twitter fs-1"></i></a>
+            <a href="https://www.instagram.com/cam.csc/" target="_blank" class="text-white"><i class="fab fa-instagram fs-1"></i></a>
+        </div>
+        <div class="line-header">Andrés Vargas<br></div>
+        <div class="download-area">
+          <a href="https://www.facebook.com/J.andres.vargas.perez" target="_blank" class="text-white mr-3"><i class="fab fa-facebook fs-1"></i></a>
+          <a href="https://twitter.com/___jorge_andres" target="_blank" class="text-white mr-3"><i class="fab fa-twitter fs-1"></i></a>
+          <a href="https://www.instagram.com/___andres_vargas/" target="_blank" class="text-white"><i class="fab fa-instagram fs-1"></i></a>
+        </div>
+      </div>
+    </div>
+   </body>
+</html>
+
