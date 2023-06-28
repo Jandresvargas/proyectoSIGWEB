@@ -23,10 +23,7 @@
   </head>
   <style>
     #map {
-	        display: absolute;
-            height:100%;
-            border-radius: 2rem;
-            
+      height: 400px;     
         }
   </style>
   
@@ -60,7 +57,7 @@
             <path d="M22 12H2M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11zM6 16h.01M10 16h.01" />
           </svg>
         </a>
-        <a href="visor.html" class="item-link" id="pageLink4">
+        <a href="#" class="item-link" id="pageLink4">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
             <defs />
             <circle cx="12" cy="12" r="3" />
@@ -164,7 +161,20 @@
              </a>
            </div>
           <div class="content-section-line">
-            <div class="container">
+
+
+
+          </div>
+
+        </section>
+        <section class="content-section">
+          <div class="section-header-wrapper">
+            <h1 class="section-header">Recent Files</h1>
+            <a class="section-header-link">
+              View all files
+            </a>
+          </div>
+          <div class="files-table">
             <div id="map" style="z-index: 999;"></div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
             <script>
@@ -182,40 +192,6 @@
             // Añadir marcadores al mapa 
 
           </script>
-          </div>
-          </div>
-
-        </section>
-        <section class="content-section">
-          <div class="section-header-wrapper">
-            <h1 class="section-header">Recent Files</h1>
-            <a class="section-header-link">
-              View all files
-            </a>
-          </div>
-          <div class="files-table">
-            <div class="files-table-header">
-              <div class="column-header table-cell">Name</div>
-              <div class="column-header table-cell size-cell">Size</div>
-              <div class="column-header table-cell">Last Modified</div>
-              <div class="column-header table-cell">Action</div>
-            </div>
-            <div class="files-table-row">
-              <div class="table-cell name-cell pdf">Brandenburg.pdf</div>
-              <div class="table-cell">42 MB</div>
-              <div class="table-cell">Aug 26, 2020</div>
-              <div class="table-cell action-cell">
-                <button class="more-action"></button>
-              </div>
-            </div>
-            <div class="files-table-row">
-              <div class="table-cell name-cell jpg">TheLionsRoar.jpg</div>
-              <div class="table-cell size-cell">500 KB</div>
-              <div class="table-cell">Aug 26, 2020</div>
-              <div class="table-cell action-cell">
-                <button class="more-action"></button>
-              </div>
-            </div>
           </div>
         </section>
       </div>
