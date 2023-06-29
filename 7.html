@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
   <title>Leaflet Routing Machine Example</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="route/1/dist/leaflet-routing-machine.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
   <style>
     #map {
       height: 400px;
@@ -14,7 +15,7 @@
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="route/1/dist/leaflet-routing-machine.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
   <script>
     // Crear el mapa
     var map = L.map('map').setView([0, 0], 13);
@@ -35,14 +36,23 @@
       // Agregar un marcador en la ubicación del usuario
       L.marker(userLocation).addTo(map).bindPopup('¡Estás aquí!').openPopup();
 
-      // Calcular la ruta desde la ubicación del usuario hasta un punto específico
-      var control = L.Routing.control({
+      // Coordenadas del punto de destino (Ejemplo: San Francisco)
+      var destino = L.latLng(3.32, -76.854);
+
+      // Configuración de opciones de enrutamiento
+      var controlOptions = {
         waypoints: [
-          L.latLng(userLocation.lat, userLocation.lng),  // Ubicación del usuario
-          L.latLng(40.7128, -74.0060)  // Punto de destino (Nueva York, por ejemplo)
+          userLocation,
+          destino
         ],
         routeWhileDragging: true
-      }).addTo(map);
+      };
+
+      // Crear el control de enrutamiento
+      var control = L.Routing.control(controlOptions).addTo(map);
+
+      // Centrar el mapa en la ruta
+      map.fitBounds(control.getPlan().getBounds());
     }
 
     // Manejar el evento de error de ubicación
