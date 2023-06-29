@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa con buffer de ubicación actual - Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+
+        #bufferSlider {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <input type="range" id="bufferSlider" min="100" max="2000" step="100" value="1000">
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([0, 0], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Obtener la ubicación actual del usuario
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            var location = L.latLng(latitude, longitude);
+            var bufferRadius = 1000; // Valor inicial del radio del buffer en metros
+
+            var buffer = L.circle(location, {
+                radius: bufferRadius,
+                color: 'blue',
+                fillColor: 'lightblue',
+                fillOpacity: 0.5
+            }).addTo(map);
+
+            // Ajustar la vista del mapa a la ubicación actual
+            map.setView(location, 13);
+
+            // Actualizar el buffer cuando se cambie el valor del control deslizante
+            document.getElementById('bufferSlider').addEventListener('input', function(event) {
+                bufferRadius = event.target.value;
+                buffer.setRadius(bufferRadius);
+            });
+        }, function(error) {
+            console.error('Error al obtener la ubicación: ' + error.message);
+        });
+    </script>
+</body>
+</html>
