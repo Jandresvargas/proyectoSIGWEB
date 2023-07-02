@@ -29,14 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Visor</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="css/routepanel.css">
-      <!-- Google Maps API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key="></script>
 
-	
-
-<!-- Leaflet-Pegman -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet-pegman@0.1.6/leaflet-pegman.css" />
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="sidebar/css/leaflet-sidebar.css" />
@@ -55,41 +48,8 @@
         text-align: justify;
         color: #AAA;
     }
-    #bufferSlider {
-            width: 300px;
-        }
-
-    #data-table {
-        margin-top: 20px;
-        border-collapse: collapse;
-    }
-
-    #data-table th,
-    #data-table td {
-        padding: 8px;
-        border: 1px solid black;
-    }
   </style>
-  <style>
-		/* Fixes Google Mutant Empty attribution */
-		.leaflet-bottom.leaflet-left,
-		.leaflet-bottom.leaflet-right {
-			margin-bottom: initial !important;
-		}
-
-		/* Make Google Logo/ToS/Feedback links clickable */
-		.leaflet-google-mutant a,
-		.leaflet-google-mutant button {
-			pointer-events: auto;
-		}
-
-		/* Move Google ToS/Feedback to the top */
-		.leaflet-google-mutant .gmnoprint,
-		.leaflet-google-mutant .gm-style-cc {
-			top: 0;
-			bottom: auto !important;
-		}
-	</style>
+  
   <body>
     <!-- optionally define the sidebar content via HTML markup -->
     <div id="sidebar" class="leaflet-sidebar collapsed">
@@ -171,27 +131,14 @@
           <div class="leaflet-sidebar-pane" id="router">
             <h1 class="leaflet-sidebar-header">Indicaciones<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
             <br>
-            <h1>Trazar Ruta</h1>
-            <div id="routing-control" id="panel"></div>
-            <button id="btnRoute">Trazar Ruta</button>
+            
           </div>
-          <div class="leaflet-sidebar-pane" id="buffer">
+          <div class="leaflet-sidebar-pane" id="eliminar">
             <h1 class="leaflet-sidebar-header">
-                Cercania
+                Eliminar
                 <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
             </h1>
-            <input type="range" id="bufferSlider" min="100" max="2000" step="100" value="1000">
-            <button id="processButton">Iniciar proceso</button>
-            <table id="data-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody id="data-body">
-                </tbody>
-            </table>
+            
           </div>
           <div class="leaflet-sidebar-pane" id="manual">
             <h1 class="leaflet-sidebar-header">Manual<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
@@ -258,21 +205,14 @@
                 <!-- Minimapa -->
             <link rel="stylesheet" href="Leaflet-MiniMap-master/Control.MiniMap.css" />
             <script src="Leaflet-MiniMap-master/Control.MiniMap.js" type="text/javascript"></script>
-            <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-            <script src="https://unpkg.com/leaflet-sidebar-v2/js/leaflet-sidebar.min.js"></script>
             <script src="sidebar/js/leaflet-sidebar.js"></script>
-            <script src="https://unpkg.com/leaflet-pegman@0.1.6/leaflet-pegman.js"></script>
-            <!-- interact.js -->
-            <script src="https://unpkg.com/interactjs@1.2.9/dist/interact.min.js"></script>
-            <!-- Leaflet-GoogleMutant -->
-            <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@0.10.0/Leaflet.GoogleMutant.js"></script>
             <script>
               
             // {
               //zoomControl:true, maxZoom:19, minZoom:5
             //} Cree un objeto de mapa Leaflet en el div con id "mapid" 4.674704, -74.030091
               var map = L.map('map',{
-                zoomControl:true, maxZoom:18, minZoom:7
+                zoomControl:true, maxZoom:19, minZoom:7
               } ).setView([3.418853, -76.518752], 11.5);
               // Añadir un mosaico de mapas a tu mapa
               var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -290,12 +230,6 @@
                   height: 200,
                   strings: {hideText: 'Ocultar MiniMapa', showText: 'Mostrar MiniMapa'}
               }).addTo(map);
-
-              var pegmanControl = new L.Control.Pegman({
-                position: 'bottomright', // position of control inside the map
-                theme: "leaflet-pegman-v3-default", // or "leaflet-pegman-v3-small"
-              });
-              pegmanControl.addTo(map);
               var leyenda = L.control.layers({OpenStreetMap,satelite}).addTo(map);
               // Añadir marcadores al mapa 
               // create the sidebar instance and add it to the map
@@ -365,153 +299,7 @@
                   leyenda.addOverlay(motos, 'Talleres de motos');
                       }
                   });
-
               var sidebar = L.control.sidebar({ container: 'sidebar',  position: "right" }).addTo(map);
-              var routingControl = null;
-              var userMarker = null;
-              //////////////////////////////////////////// Routing
-
-              document.getElementById('btnRoute').addEventListener('click', function() {
-              if (routingControl) {
-                // Si ya hay un control de enrutamiento activo, se cancela
-                routingControl.getPlan().setWaypoints([]);
-                routingControl.spliceWaypoints(0, 2);
-                map.removeControl(routingControl);
-                routingControl = null;
-
-                // Se elimina el marcador del usuario si existe
-                if (userMarker) {
-                  map.removeLayer(userMarker);
-                  userMarker = null;
-                }
-              } else {
-                // Si no hay un control de enrutamiento activo, se inicia el proceso
-                map.locate({ setView: true, maxZoom: 12 });
-              }
-            });
-
-            function onLocationFound(e) {
-              var userLocation = e.latlng;
-
-              userMarker = L.marker(userLocation).addTo(map).bindPopup('¡Estás aquí!').openPopup();
-
-              var destino = L.latLng(3.382302, -76.516218);
-
-              var controlOptions = {
-                waypoints: [
-                  userLocation,
-                  destino
-                ],
-                language: 'es', 
-                routeWhileDragging: true
-              };
-
-              routingControl = L.Routing.control(controlOptions).addTo(map);
-
-              map.fitBounds(routingControl.getPlan().getBounds());
-            }
-
-            function onLocationError(e) {
-              alert('No fue posible encontrar tu ubicación');
-            }
-
-            map.on('locationfound', onLocationFound);
-            map.on('locationerror', onLocationError);
-
-        ///////////////////////////////////////////////Buffer//////////////////////////////////////////
-        var buffer;
-        var request;
-        var isProcessing = false;
-        document.getElementById('processButton').addEventListener('click', function() {
-            if (isProcessing) {
-                cancelProcess();
-            } else {
-                startProcess();
-            }
-        });
-        function startProcess() {
-            isProcessing = true;
-            document.getElementById('processButton').textContent = 'Cancelar proceso';
-
-            // Obtener la ubicación actual del usuario
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-
-                var location = L.latLng(latitude, longitude);
-                var bufferRadius = 1000; // Valor inicial del radio del buffer en metros
-
-                generateBuffer(location, bufferRadius);
-                fetchDataFromDatabase(location, bufferRadius);
-            }, function(error) {
-                console.error('Error al obtener la ubicación: ' + error.message);
-            });
-        }
-        function cancelProcess() {
-            isProcessing = false;
-            document.getElementById('processButton').textContent = 'Iniciar proceso';
-
-            if (buffer) {
-                buffer.remove();
-                buffer = null;
-            }
-            if (request) {
-                request.abort();
-                request = null;
-            }
-
-            var dataBody = document.getElementById('data-body');
-            dataBody.innerHTML = '';
-        }
-
-        function generateBuffer(location, bufferRadius) {
-            buffer = L.circle(location, {
-                radius: bufferRadius,
-                color: 'blue',
-                fillColor: 'lightblue',
-                fillOpacity: 0.5
-            }).addTo(map);
-
-            // Ajustar la vista del mapa a la ubicación actual
-            map.setView(location, 13);
-
-            // Actualizar el buffer cuando se cambie el valor del control deslizante
-            document.getElementById('bufferSlider').addEventListener('input', function(event) {
-                bufferRadius = event.target.value;
-                buffer.setRadius(bufferRadius);
-                fetchDataFromDatabase(location, bufferRadius);
-            });
-        }
-
-        function fetchDataFromDatabase(location, bufferRadius) {
-            var dataBody = document.getElementById('data-body');
-            dataBody.innerHTML = ''; // Limpiar los datos anteriores
-
-            // Realizar una petición AJAX para obtener los datos de la base de datos
-            request = new XMLHttpRequest();
-            request.open('GET', 'php/buffer.php?latitude=' + location.lat + '&longitude=' + location.lng + '&bufferRadius=' + bufferRadius, true);
-
-            request.onload = function() {
-                if (request.status >= 200 && request.status < 400) {
-                    var data = JSON.parse(request.responseText);
-
-                    // Mostrar los datos en la tabla
-                    data.forEach(function(row) {
-                        var newRow = document.createElement('tr');
-                        newRow.innerHTML = '<td>' + row.id + '</td>' + '<td>' + row.nombre + '</td>';
-                        dataBody.appendChild(newRow);
-                    });
-                } else {
-                    console.error('Error al obtener los datos de la base de datos.');
-                }
-            };
-
-            request.onerror = function() {
-                console.error('Error al realizar la petición AJAX.');
-            };
-
-            request.send();
-        }
         // add panels dynamically to the sidebar
         sidebar
             .addPanel({
@@ -522,9 +310,9 @@
             // add a tab with a click callback, initially disabled
             // Panel de eliminar datos 
             .addPanel({
-                id:   'buffer',
-                title: 'Cercanias',
-                tab:  '<i class="fa fa-dot-circle-o"></i>'
+                id:   'eliminar',
+                title: 'Eliminar registro',
+                tab:  '<i class="fa fa-trash-o"></i>'
             })
             .addPanel({
                 id:   'manual',

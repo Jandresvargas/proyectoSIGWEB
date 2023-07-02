@@ -153,7 +153,7 @@
                 <tbody>
                     <?php
                         // Consulta SQL para obtener los puntos
-                        $query = "SELECT id, nombre, rating,ST_X(geom) as lng, ST_Y(geom) as lat FROM talleres WHERE categoria LIKE 'Taller de motos'";
+                        $query = "SELECT id, nombre, rating,ST_X(geom) as lng, ST_Y(geom) as lat FROM talleres WHERE categoria LIKE 'Gasolinera'";
                         $result = pg_query($conexion, $query);
                         if (!$result) {
                         echo "Error al obtener los puntos.";
@@ -251,23 +251,23 @@
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
         <!-- Enlace a manual -->
-        <a href="visorbomba.php" class="item-link" id="pageLink2">
-          <img src="img/bomba.svg" style="opacity: 0.3; height: 2rem" title="Manual">
+        <a class="item-link" id="pageLink2">
+          <img src="img/bomba.svg" style="height: 2rem" title="Estaciones de servicio">
         </a>
         <!-- Enlace a visor talleres automotrices -->
-        <a href="visorauto.html" class="item-link" id="pageLink3">
+        <a href="visorauto.php" class="item-link" id="pageLink3">
           <img src="img/car.svg" style="opacity: 0.3; height: 2rem" title="Taller automotriz" >
         </a>
         <!-- Enlace a taller de motos -->
-        <a class="item-link" id="pageLink4">
-          <img src="img/moto2.svg" style="height: 2rem" title="Taller de motocicletas" >
+        <a href="visormotorbike.php" class="item-link" id="pageLink4">
+          <img src="img/moto2.svg" style="opacity: 0.3; height: 2rem" title="Taller de motocicletas" >
         </a>
         <!-- Enlace a taller de bicicletas -->
-        <a class="item-link" id="pageLink4">
+        <a href="visorbike.php" class="item-link" id="pageLink4">
           <img src="img/bike.svg" style="opacity: 0.3; height: 2rem" title="Taller de bicicletas" >
         </a>
         <!-- Enlace a montallantas -->
-        <a class="item-link" id="pageLink4">
+        <a href="visormontallantas.php" class="item-link" id="pageLink4">
           <img src="img/tire.svg" style="opacity: 0.3; height: 2rem" title="Montallantas" >
         </a>
         <!-- SALIR -->
@@ -286,7 +286,7 @@
 
         <section class="content-section" style="margin-top: 0px; padding: 10px;">
           <div class="section-header-wrapper">
-            <h1 class="section-header" style="font-size: 15px; text-align: center; margin-bottom: 5px; margin-top: 5px;">Talleres de motocicletas</h1>
+            <h1 class="section-header" style="font-size: 15px; text-align: center; margin-bottom: 5px; margin-top: 5px;">Estaciones de servicio</h1>
           </div>
           <div class="files-table" style="padding: 5px">
             <div id="map" style="z-index: 0">
@@ -377,7 +377,7 @@
                   }
                   // Creación de marcador en el punto 
                   currentMarker = L.marker([lat, lng]).addTo(map);
-                  //currentMarker.bindPopup('<?php echo $nombre?>' + nombre).openPopup();
+
                   map.flyTo([lat, lng], 18);
                   }
                    // POP UP de información de puntos  
@@ -385,24 +385,24 @@
                   layer.bindPopup("<h1>" + feature.properties.nombre + "</h1><hr>"+"<strong> Rating: </strong>"+feature.properties.rating+"<br/>"+"<strong> Servicios: </strong> <br>"+feature.properties.servicio1+"<br/>"+feature.properties.servicio2+"<br/>"+feature.properties.servicio3+"<br/>"+"<strong> Direccion: </strong>"+feature.properties.direccion+"<br/>"+"<strong> Web: </strong>"+feature.properties.web+"<br/>"+"<strong> Telefono: </strong>"+feature.properties.telefono+"<br/>");
               }
               //carga la capa Motos como geojson desde la gdb
-              var motos = L.geoJSON();
-                  $.post("php/cargar_motorbike.php",
+              var bomba = L.geoJSON();
+                  $.post("php/cargarbomba.php",
                       {
                           peticion: 'cargar',
                       },function (data, status, feature)
                       {
                       if(status=='success')
                       {
-                          motos = eval('('+data+')');
-                          var motos = L.geoJSON(motos, {
+                        bomba = eval('('+data+')');
+                          var bomba = L.geoJSON(bomba, {
                       onEachFeature: info_popup
                           });
                           
-                          motos.eachLayer(function (layer) {
+                          bomba.eachLayer(function (layer) {
                           layer.setZIndexOffset(1000);
                           });
                   // Agregar capa al controlador de capas
-                  leyenda.addOverlay(motos, 'Talleres de motos');
+                  leyenda.addOverlay(bomba, 'Estaciones de servicio');
                       }
                   });
               /// Agregar side bar al mapa
@@ -522,7 +522,7 @@
 
             // Realizar una petición AJAX para obtener los datos de la base de datos
             request = new XMLHttpRequest();
-            request.open('GET', 'php/buffer_moto.php?latitude=' + location.lat + '&longitude=' + location.lng + '&bufferRadius=' + bufferRadius, true);
+            request.open('GET', 'php/buffer_bomba.php?latitude=' + location.lat + '&longitude=' + location.lng + '&bufferRadius=' + bufferRadius, true);
 
             request.onload = function() {
                 if (request.status >= 200 && request.status < 400) {
