@@ -1,3 +1,19 @@
+
+<?php 
+	define("PG_DB"  , "Proyecto_SIGWEB");
+	define("PG_HOST", "localhost");
+	define("PG_USER", "postgres");
+	define("PG_PSWD", "12345");
+	define("PG_PORT", "5433");
+	
+	$conexion = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER ." password=".PG_PSWD." port=".PG_PORT."");
+    if (!$conexion) {
+        echo "Error de conexión con la base de datos.";
+        exit;
+    }
+ ?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Visor</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
+    <link rel="stylesheet" href="css/routepanel.css">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="sidebar/css/leaflet-sidebar.css" />
@@ -32,6 +48,10 @@
         text-align: justify;
         color: #AAA;
     }
+    #routing-control{
+
+      background-color: green;
+    }
   </style>
   
   <body>
@@ -43,7 +63,7 @@
           <!-- top aligned tabs -->
           <ul role="tablist">
               <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-              <li><a href="#autopan" role="tab"><i class="fa fa-arrows"></i></a></li>
+              <li><a href="#autopan" role="tab"><i class="fa fa-map-marker" title="Acercar a taller"></i></a></li>
           </ul>
 
           <!-- bottom aligned tabs -->
@@ -56,26 +76,80 @@
       <div class="leaflet-sidebar-content">
           <div class="leaflet-sidebar-pane" id="home">
               <h1 class="leaflet-sidebar-header">
-                  sidebar-v2
+                  Motocicletas
                   <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
               </h1>
 
               <p>Tecxto </p>
+              
           </div>
 
           <div class="leaflet-sidebar-pane" id="autopan">
               <h1 class="leaflet-sidebar-header">
-                  autopan
+                  Acercar a taller
                   <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
               </h1>
               
               <p>
                   Mas tecxto
               </p>
-          </div>
+              <table class="ttable table-striped table-bordered" id="locationsTable">
+                <!-- Encabezado de tabla -->
+                <thead>
+                    <tr>
 
-          <div class="leaflet-sidebar-pane" id="messages">
-              <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                        <th>Nombre</th>
+                        <th>Calificación</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        // Consulta SQL para obtener los puntos
+                        $query = "SELECT id, nombre, rating,ST_X(geom) as lng, ST_Y(geom) as lat FROM talleres WHERE categoria LIKE 'Taller de motos'";
+                        $result = pg_query($conexion, $query);
+                        if (!$result) {
+                        echo "Error al obtener los puntos.";
+                        exit;
+                        }
+                        // Array para almacenar marcadores
+                        $markers = [];
+
+                        // Iterar resultados, generar las filas de la tabla y marcadores
+                        while ($row = pg_fetch_assoc($result)) {
+
+                            $nombre = $row['nombre'];
+                            $rating = $row['rating'];
+                            $lat = $row['lat'];
+                            $lng = $row['lng'];
+                            echo "<tr>";
+                            echo "<td>$nombre</td>";
+                            echo "<td>$rating</td>";
+                            echo "<td><button onclick=\"zoomToLocation($lat, $lng)\">Zoom</button></td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+          </div>
+          <div class="leaflet-sidebar-pane" id="router">
+            <h1 class="leaflet-sidebar-header">Indicaciones<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
+            <br>
+            <h1>Trazar Ruta</h1>
+            <div id="routing-control" id="panel"></div>
+            <button id="btnRoute">Trazar Ruta</button>
+          </div>
+          <div class="leaflet-sidebar-pane" id="eliminar">
+            <h1 class="leaflet-sidebar-header">
+                Eliminar
+                <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+            </h1>
+            
+          </div>
+          <div class="leaflet-sidebar-pane" id="manual">
+            <h1 class="leaflet-sidebar-header">Manual<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
+            <br>
+            <embed src="manual.pdf" type="application/pdf" width="100%" height="600px" />
           </div>
       </div>
   </div>
@@ -92,22 +166,29 @@
         </button>
         <div class="app-name">SIG</div>
         <a href="principal.html" class="item-link active" id="pageLink">
-          <img src="img/hard-drive.svg" style="opacity: 0.3;">
+          <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
-        <a href="dashboard.html" class="item-link" id="pageLink2">
-          <img src="img/airplay.svg" style="opacity: 0.3;">
+        <a href="manual.html" class="item-link" id="pageLink2">
+          <img src="img/file-text.svg" style="opacity: 0.3; height: 2rem" title="Manual">
         </a>
-        <a href="manual.html" class="item-link" id="pageLink3">
-          <img src="img/file-text.svg" style="opacity: 0.3;">
+        <a href="visorauto.html" class="item-link" id="pageLink3">
+          <img src="img/car.svg" style="opacity: 0.3; height: 2rem" title="Taller automotriz" >
         </a>
         <a class="item-link" id="pageLink4">
-          <img src="img/map.svg" alt="aaaaaaaaahhhhhhhh">
+          <img src="img/moto2.svg" style="height: 2rem" title="Taller de motocicletas" >
+        </a>
+        <a class="item-link" id="pageLink4">
+          <img src="img/bike.svg" style="opacity: 0.3; height: 2rem" title="Taller de bicicletas" >
+        </a>
+        <a class="item-link" id="pageLink4">
+          <img src="img/tire.svg" style="opacity: 0.3; height: 2rem" title="Montallantas" >
         </a>
         <a href="principal2.html">
             <button id="btnSalir" class="btn-logout">
-              <img src="img/log-out.svg" style="opacity: 0.3;">
+              <img src="img/log-out.svg" style="opacity: 0.3; height: 2rem" title="Salir">
             </button>
         </a>
+        
       </div>
       <div class="main-area" style="padding-bottom: 5px;">
 
@@ -130,6 +211,8 @@
                 <!-- Minimapa -->
             <link rel="stylesheet" href="Leaflet-MiniMap-master/Control.MiniMap.css" />
             <script src="Leaflet-MiniMap-master/Control.MiniMap.js" type="text/javascript"></script>
+            <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+            <script src="https://unpkg.com/leaflet-sidebar-v2/js/leaflet-sidebar.min.js"></script>
             <script src="sidebar/js/leaflet-sidebar.js"></script>
             <script>
               
@@ -137,7 +220,7 @@
               //zoomControl:true, maxZoom:19, minZoom:5
             //} Cree un objeto de mapa Leaflet en el div con id "mapid" 4.674704, -74.030091
               var map = L.map('map',{
-                zoomControl:true, maxZoom:19, minZoom:7
+                zoomControl:true, maxZoom:18, minZoom:7
               } ).setView([3.418853, -76.518752], 11.5);
               // Añadir un mosaico de mapas a tu mapa
               var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -188,33 +271,24 @@
                   transparent: true,
                   tms: true
                   });
-
+                  /// Crear variable para los marcadores de visualizacion de puntos individuales
+              var currentMarker;
+                  // Funcion para acercamiento a puntos individuales
+              function zoomToLocation(lat, lng, nombre) {
+                  if (currentMarker) {
+                      map.removeLayer(currentMarker);
+                  }
+                  // Creación de marcador en el punto 
+                  currentMarker = L.marker([lat, lng]).addTo(map);
+                  //currentMarker.bindPopup('<?php echo $nombre?>' + nombre).openPopup();
+                  map.flyTo([lat, lng], 18);
+                  }
                    // POP UP de información de puntos  
               function info_popup(feature, layer){
-                  layer.bindPopup("<h1>" + feature.properties.nombre + "</h1><hr>"+"<strong> Identificación: </strong>"+feature.properties.id+"<br/>"+"<strong> Tipo: </strong>"+feature.properties.tipo+"<br/>");
+                  layer.bindPopup("<h1>" + feature.properties.nombre + "</h1><hr>"+"<strong> Rating: </strong>"+feature.properties.rating+"<br/>"+"<strong> Servicios: </strong> <br>"+feature.properties.servicio1+"<br/>"+feature.properties.servicio2+"<br/>"+feature.properties.servicio3+"<br/>"+"<strong> Direccion: </strong>"+feature.properties.direccion+"<br/>"+"<strong> Web: </strong>"+feature.properties.web+"<br/>"+"<strong> Telefono: </strong>"+feature.properties.telefono+"<br/>");
               }
-              //carga la capa bicicleterias como geojson desde la gdb
-              var sitios_interes = L.geoJSON();
-                  $.post("php/cargar_bike.php",
-                      {
-                          peticion: 'cargar',
-                      },function (data, status, feature)
-                      {
-                      if(status=='success')
-                      {
-                          sitios_interes = eval('('+data+')');
-                          var sitios_interes = L.geoJSON(sitios_interes, {
-                      onEachFeature: info_popup
-                          });
-                          
-                          sitios_interes.eachLayer(function (layer) {
-                          layer.setZIndexOffset(1000);
-                          });
-                  leyenda.addOverlay(sitios_interes, 'Sitios de interes');
-                      }
-                  });
               //carga la capa Motos como geojson desde la gdb
-              var sitios_interes2 = L.geoJSON();
+              var motos = L.geoJSON();
                   $.post("php/cargar_motorbike.php",
                       {
                           peticion: 'cargar',
@@ -222,35 +296,102 @@
                       {
                       if(status=='success')
                       {
-                          sitios_interes2 = eval('('+data+')');
-                          var sitios_interes2 = L.geoJSON(sitios_interes2, {
+                          motos = eval('('+data+')');
+                          var motos = L.geoJSON(motos, {
                       onEachFeature: info_popup
                           });
                           
-                          sitios_interes2.eachLayer(function (layer) {
+                          motos.eachLayer(function (layer) {
                           layer.setZIndexOffset(1000);
                           });
-                  leyenda.addOverlay(sitios_interes2, 'Sitios');
+                  leyenda.addOverlay(motos, 'Talleres de motos');
                       }
                   });
+
               var sidebar = L.control.sidebar({ container: 'sidebar',  position: "right" }).addTo(map);
+              var routingControl = null;
+              var userMarker = null;
+              //////////////////////////////////////////// Routing
+
+              document.getElementById('btnRoute').addEventListener('click', function() {
+              if (routingControl) {
+                // Si ya hay un control de enrutamiento activo, se cancela
+                routingControl.getPlan().setWaypoints([]);
+                routingControl.spliceWaypoints(0, 2);
+                map.removeControl(routingControl);
+                routingControl = null;
+
+                // Se elimina el marcador del usuario si existe
+                if (userMarker) {
+                  map.removeLayer(userMarker);
+                  userMarker = null;
+                }
+              } else {
+                // Si no hay un control de enrutamiento activo, se inicia el proceso
+                map.locate({ setView: true, maxZoom: 12 });
+              }
+            });
+
+            function onLocationFound(e) {
+              var userLocation = e.latlng;
+
+              userMarker = L.marker(userLocation).addTo(map).bindPopup('¡Estás aquí!').openPopup();
+
+              var destino = L.latLng(3.382302, -76.516218);
+
+              var controlOptions = {
+                waypoints: [
+                  userLocation,
+                  destino
+                ],
+                language: 'es', 
+                routeWhileDragging: true
+              };
+
+              routingControl = L.Routing.control(controlOptions).addTo(map);
+
+              map.fitBounds(routingControl.getPlan().getBounds());
+            }
+
+            function onLocationError(e) {
+              alert('No fue posible encontrar tu ubicación');
+            }
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
         // add panels dynamically to the sidebar
         sidebar
             .addPanel({
-                id:   'js-api',
-                tab:  '<i class="fa fa-gear"></i>',
-                title: 'JS API',
-                pane: '<p>Texto<p/><p><button onclick="sidebar.enablePanel(\'mail\')">Boton</button><button onclick="sidebar.disablePanel(\'mail\')">disable mails panel</button></p><p><button onclick="addUser()">add user</button></b>',
+                id:   'router',
+                tab:  '<i class="fa fa-crosshairs"></i>',
+                title: 'Indicaciones'
             })
             // add a tab with a click callback, initially disabled
+            // Panel de eliminar datos 
             .addPanel({
-                id:   'mail',
-                tab:  '<i class="fa fa-envelope"></i>',
-                title: 'Messages',
+                id:   'eliminar',
+                title: 'Eliminar registro',
+                tab:  '<i class="fa fa-trash-o"></i>'
+            })
+            .addPanel({
+                id:   'manual',
+                tab:  '<i class="fa fa-file-pdf-o"></i>',
+                title: 'Manual de usuario',
 
             })
+            // be notified when a panel is opened
+          sidebar.on('content', function (ev) {
+              switch (ev.id) {
+                  case 'autopan':
+                  sidebar.options.autopan = true;
+                  break;
+                  default:
+                  sidebar.options.autopan = false;
+              }
+          });
             leyenda.addOverlay(comunas, 'Comuna 22');
             leyenda.addOverlay(barrios, 'Barrios y sectores');
+            
           </script>
           </div>
         </section>

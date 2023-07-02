@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa con puntos dentro de un buffer - Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([0, 0], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Obtener la ubicación actual del usuario
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            var location = L.latLng(latitude, longitude);
+            var bufferRadius = 10000; // Valor inicial del radio del buffer en metros
+
+            var buffer = L.circle(location, {
+                radius: bufferRadius,
+                color: 'blue',
+                fillColor: 'lightblue',
+                fillOpacity: 0.5
+            }).addTo(map);
+
+            // Ajustar la vista del mapa a la ubicación actual
+            map.setView(location, 13);
+
+            // Actualizar el buffer cuando se cambie el valor del control deslizante
+            document.getElementById('bufferSlider').addEventListener('input', function(event) {
+                bufferRadius = event.target.value;
+                buffer.setRadius(bufferRadius);
+                fetchDataFromDatabase(location, bufferRadius);
+            });
+
+            // Obtener los datos de la base de datos inicialmente
+            fetchDataFromDatabase(location, bufferRadius);
+        }, function(error) {
+            console.error('Error al obtener la ubicación: ' + error.message);
+        });
+
+        // Función para obtener los datos de la base de datos
+        function fetchDataFromDatabase(location, bufferRadius) {
+            // Crear el objeto FormData para enviar los datos del buffer al servidor
+            var formData = new FormData();
+            formData.append('buffer', JSON.stringify(buffer.toGeoJSON()));
+
+            // Realizar una petición AJAX al archivo PHP para obtener los puntos dentro del buffer
+            fetch('3.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.error('Error al obtener los datos de la base de datos.');
+                }
+            })
+            .then(function(data) {
+                // Limpiar los marcadores anteriores
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+
+                // Agregar los marcadores de los puntos al mapa
+                data.forEach(function(point) {
+                    L.marker([point.latitud, point.longitud]).addTo(map);
+                });
+            })
+            .catch(function(error) {
+                console.error('Error al realizar la petición AJAX:', error);
+            });
+        }
+    </script>
+</body>
+</html>

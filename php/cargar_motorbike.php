@@ -16,7 +16,7 @@
 
     switch ($peticion) {
         case 'cargar': {
-            $tipo = "Farmacia"; // Valor del tipo que deseas filtrar
+            $categoria = "Taller de motos"; // Valor del tipo que deseas filtrar
 
             $sql = "SELECT row_to_json(fc) AS geojson
                     FROM (
@@ -24,9 +24,9 @@
                         FROM (
                             SELECT 'Feature' AS type,
                                 ST_AsGeoJSON(lg.geom)::json AS geometry,
-                                row_to_json((SELECT l FROM (SELECT id, nombre, tipo) AS l)) AS properties
-                            FROM sitios_interes AS lg
-                            WHERE tipo = '$tipo' -- Filtrar por tipo
+                                row_to_json((SELECT l FROM (SELECT id, nombre, rating, direccion, web, telefono, servicio1, servicio2, servicio3) AS l)) AS properties
+                            FROM talleres AS lg
+                            WHERE categoria = '$categoria' -- Filtrar por tipo
                         ) AS f
                     ) AS fc;";
 

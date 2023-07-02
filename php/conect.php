@@ -1,7 +1,7 @@
 <?php
  #Archivo de configuracion de la base de datos
  
-    define("PG_DB"  , "t2p");
+    define("PG_DB"  , "Proyecto_SIGWEB");
 	define("PG_HOST", "localhost");
 	define("PG_USER", "postgres");
 	define("PG_PSWD", "12345");
@@ -16,6 +16,6 @@
 		exit;}
 
 		
-	$sql="SELECT * from sitios_interes";
+	$sql="SELECT * from talleres";
 	$result=pg_query($dbcon,$sql);
 ?>

@@ -53,7 +53,9 @@ a { text-decoration: none; cursor: pointer; }
   width: 100vw;
   height: 100vh;
 }
-
+.custom-panel {
+  background-color: green;
+}
 .left-area {
   padding: 32px;
   flex-basis: 1 0 132px;
@@ -84,6 +86,7 @@ a { text-decoration: none; cursor: pointer; }
   color: var(--light-font);
   margin-bottom: 32px;
   transition: .2s;
+  
   
   &.active {
     color: var(--dark-font);
