@@ -19,9 +19,9 @@ $bufferRadius = $_GET['bufferRadius'];
 
 // Construir la consulta SQL para obtener los puntos dentro del buffer
 $sql = "
-SELECT id, nombre
+SELECT id, nombre, categoria
 FROM talleres
-WHERE ST_DWithin(geom, ST_SetSRID(ST_MakePoint($longitude, $latitude), 4326)::geography, $bufferRadius)
+WHERE ST_DWithin(geom, ST_SetSRID(ST_MakePoint($longitude, $latitude), 4326)::geography, $bufferRadius) AND categoria LIKE 'Taller de motos'
 ";
 
 // Ejecutar la consulta y obtener los resultados
