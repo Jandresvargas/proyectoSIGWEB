@@ -19,7 +19,7 @@ CREATE TABLE talleres (
 		
 SELECT * FROM talleres
 -- Eliminar tabla
-DROP TABLE talleres
+DROP TABLE usuarios
 -- Eliminar registros (solo usar para pruebas)
 DELETE FROM talleres WHERE id = '1544'
 SELECT count FROM talleres
@@ -610,4 +610,9 @@ INSERT INTO talleres VALUES (496459,'BICICLETAS Y ACCESORIOS','Taller de bicicle
 INSERT INTO talleres VALUES (498755,'Estacion de Servicio Esso Mobil','Gasolinera','4.7','Combustible','Venta de lubricantes','','Cra. 34 #14, Santa Elena','https://www.essoymobil.com.co/es-co/find-station','3012933257','Donato Julian Llobet Garzon',ST_SetSRID(ST_MakePoint(-76.4905858,3.4458239), 4326));
 INSERT INTO talleres VALUES (498834,'Estacion de Servicio Texaco La Nueva Autopista','Gasolinera','4.3','Combustible','Venta de lubricantes','','Dg. 23 #100, Las Acacias','https://www.texacocontechron.com/','3164057290','Eric Jose Salmeran Cañizares',ST_SetSRID(ST_MakePoint(-76.5436346,3.4049731), 4326));
 
-
+CREATE TABLE usuarios (
+		  password VARCHAR (10) PRIMARY KEY NOT NULL,
+		  username VARCHAR(100)
+		  );
+INSERT INTO usuarios VALUES (1841185,'Andres Vargas');
+INSERT INTO usuarios VALUES (1840343,'Camila Carmona');

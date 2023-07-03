@@ -247,7 +247,7 @@
         <!-- Titulo -->
         <div class="app-name">SIG</div>
         <!-- Enlace a pagina principal -->
-        <a href="principal.html" class="item-link active" id="pageLink">
+        <a href="principalvisitante.html" class="item-link active" id="pageLink">
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
         <!-- Enlace a manual -->
@@ -255,19 +255,19 @@
           <img src="img/bomba.svg" style="opacity: 0.3; height: 2rem" title="Manual">
         </a>
         <!-- Enlace a visor talleres automotrices -->
-        <a href="visorauto.html" class="item-link" id="pageLink3">
+        <a href="visorauto.php" class="item-link" id="pageLink3">
           <img src="img/car.svg" style="opacity: 0.3; height: 2rem" title="Taller automotriz" >
         </a>
         <!-- Enlace a taller de motos -->
-        <a class="item-link" id="pageLink4">
+        <a  class="item-link" id="pageLink4">
           <img src="img/moto2.svg" style="height: 2rem" title="Taller de motocicletas" >
         </a>
         <!-- Enlace a taller de bicicletas -->
-        <a class="item-link" id="pageLink4">
+        <a href="visorbike.php" class="item-link" id="pageLink4">
           <img src="img/bike.svg" style="opacity: 0.3; height: 2rem" title="Taller de bicicletas" >
         </a>
         <!-- Enlace a montallantas -->
-        <a class="item-link" id="pageLink4">
+        <a href="visormontallantas.php" class="item-link" id="pageLink4">
           <img src="img/tire.svg" style="opacity: 0.3; height: 2rem" title="Montallantas" >
         </a>
         <!-- SALIR -->

@@ -1,0 +1,96 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+
+*{
+  margin:0;
+  padding:0;
+  border:0;
+  font-family:'Open Sans',sans-serif;
+
+}
+
+body{
+  background-color:rgb(161, 228, 217);
+}
+#form{
+width: auto;
+margin:25px 0px;
+padding: 0 30px;
+}
+#base{
+	border-top-left-radius:5px;
+  border-top-right-radius:5px;
+	background-color: #73BAD6;
+	width:300px;
+  height:250px;
+    margin:auto;
+  position: absolute;
+top:0;  bottom:0;  left:0;  right:0;
+  	border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
+}
+
+.input{
+  margin:5px 8px;
+  background-color:#EBEBEB;
+  height:30px;
+  width:90%;
+  border-left: 3px solid rgb(45, 223, 159);
+  padding-left:5px;
+  font-size:75%;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.input:focus{
+  background:rgba(234, 246, 239, 0.79);
+   outline:none;
+}
+
+.input:hover{
+ border-left: 3px solid rgba(31, 162, 180, 1);
+   outline:none;
+}
+
+.boton1:hover ,.boton2:hover{
+  background-color:rgba(234, 246, 239, 0.79);
+  outline:none;
+}
+
+.boton1:active ,.boton2:active{
+
+  outline:none;
+}
+
+.boton2, .boton1{	
+  margin:28px 20px;
+  background-color:#EBEBEB;
+  text-align: center;
+  width:75px;
+  height:28px;
+  border-bottom: 3px solid rgb(45, 223, 159);
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#titulo{
+	position: relative;
+top: -13px;
+	text-align:center;
+  font-size:35px;
+  height:50px;
+  margin-bottom:15px;
+  color:rgba(82, 179, 163, 0.8);
+background-color:#EBEBEB;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+
+}
+#triangle{
+  width:0;
+  border-top:12x solid transparent;
+  border-right:12px solid transparent;
+  border-bottom:12px solid #EBEBEB;
+  border-left:12px solid transparent;
+  margin:0 auto;
+  position: relative;
+top: -13px;
+}

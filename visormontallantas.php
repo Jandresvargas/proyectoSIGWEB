@@ -247,11 +247,11 @@
         <!-- Titulo -->
         <div class="app-name">SIG</div>
         <!-- Enlace a pagina principal -->
-        <a href="principal.html" class="item-link active" id="pageLink">
+        <a href="principalvisitante.html" class="item-link active" id="pageLink">
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
-        <!-- Enlace a manual -->
-        <a class="item-link" id="pageLink2">
+        <!-- Enlace a eds -->
+        <a href="visorbomba.php" class="item-link" id="pageLink2">
           <img src="img/bomba.svg" style="opacity: 0.3; height: 2rem" title="Estaciones de servicio">
         </a>
         <!-- Enlace a visor talleres automotrices -->
