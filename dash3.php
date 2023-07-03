@@ -54,7 +54,7 @@
         // Crear el gráfico utilizando Chart.js
         var ctx = document.getElementById('grafico').getContext('2d');
         var chart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
                 labels: <?php echo json_encode($categorias); ?>,
                 datasets: [{

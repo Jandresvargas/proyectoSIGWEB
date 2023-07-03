@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Conteo de talleres intersectados con comunas</title>
+    <title>Conteo de talleres</title>
 </head>
 <body>
-    <h1>Conteo de talleres intersectados con comunas</h1>
+    <h1>Conteo de talleres</h1>
 
     <?php
-    // Conexión a la base de datos
     define("PG_DB", "Proyecto_SIGWEB");
     define("PG_HOST", "localhost");
     define("PG_USER", "postgres");
@@ -20,24 +19,18 @@
         exit;
     }
 
-    // Consulta SQL para contar los talleres que se intersectan con las comunas
-    $query = "SELECT COUNT(*) AS total_talleres FROM talleres t, comunas c WHERE ST_Intersects(t.geom, c.geom) AND c.comuna = 22";
+    $query = "SELECT COUNT(*) AS total_talleres FROM talleres";
     $result = pg_query($conn, $query);
 
     if ($result) {
         $row = pg_fetch_assoc($result);
         $totalTalleres = $row['total_talleres'];
+        echo "Cantidad de talleres: " . $totalTalleres;
     } else {
         echo "Error al realizar la consulta.";
-        $totalTalleres = 0;
     }
+
+    pg_close($conn);
     ?>
-
-    <div id="resultado">
-        <p>Total de talleres que se intersectan con las comunas: <span id="total"><?php echo $totalTalleres; ?></span></p>
-    </div>
-
-    <!-- Aquí puedes trabajar con el resultado en otros contenedores o divisiones del HTML -->
-
 </body>
 </html>
