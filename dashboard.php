@@ -88,7 +88,8 @@
         <section class="content-section"  style="text-align: justify" >
           <h1 class="section-header">Panel de control</h1>
           <a class="section-header-link">
-          En este sitio usted encontrará información geográfica de los establecimientos que se dedican al mantenimiento y reparación de vehículos, motocicletas y bicicletas, así como servicios de montallantas y ubicación de estaciones de servicio en la ciudad. A continuación encontrará la cantidad de establecimientos registrados en la base de datos</a>
+          En este sitio usted encontrará información geográfica de los establecimientos que se dedican al mantenimiento y reparación de vehículos, motocicletas y bicicletas, así como servicios de montallantas y ubicación de estaciones de servicio en la ciudad. A continuación encontrará la cantidad de establecimientos registrados en la base de datos.</a>
+          <br>
           <div class="resultado" style="font-size: 25;">
             <?php
 
@@ -168,7 +169,7 @@
         <section class="content-section" style="text-align: justify">
           <h1 class="section-header">Talleres por comuna </h1>
           <a class="section-header-link">
-              En el siguiente grafico se presentan la cantidad de talleres por comuna en la ciudad de Cali. En el eje horizontal se encuentran las comunas y en el vertical se muestra la cantidad de talleres.
+              En el siguiente gráfico se presentan la cantidad de talleres por comuna en la ciudad de Cali. En el eje horizontal se encuentran las comunas y en el vertical se muestra la cantidad de talleres.
             </a>
           <div class="content-section" style="align-items: center; align-content: center;"> 
             <?php
@@ -239,8 +240,7 @@
         <section class="content-section" style="text-align: justify">
             <h1 class="section-header">Talleres por comuna </h1>
             <a class="section-header-link">
-            Como se sabe que como es una gran cantidad de puntos, puede resultar abrumador visualizarlos todos al mismo tiempo, especialmente en niveles de zoom alejados. En lugar de mostrar cada marcador de forma individual, se agruparon para proporcionar una representación más clara y ordenada de los datos. A continuación, se presenta un mapa de agrupamiento, agrupa talleres cercanos en un solo marcador cuando el nivel de zoom es alto, y luego expandir los grupos de marcadores cuando el nivel de zoom se reduce o se hace un acercamiento.
-            </a>
+            Se sabe que como es una gran cantidad de puntos, puede resultar abrumador visualizarlos todos al mismo tiempo, especialmente en niveles de zoom alejados. En lugar de mostrar cada marcador de forma individual, se agruparon para proporcionar una representación más clara y ordenada de los datos. A continuación, se presenta un mapa que agrupa talleres cercanos en un solo marcador cuando el nivel de zoom es alto, y se expanden cuando el nivel de zoom se reduce o se hace un acercamiento.            </a>
             <div class="files-table">
               <div id="map"></div>
               <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>

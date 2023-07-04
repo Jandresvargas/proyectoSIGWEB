@@ -206,7 +206,7 @@
             </a>
             <br>
             <p style="font-family: 'DM Sans', sans-serif; font-size: 18px; text-align: justify">
-                En esta sección usted podrá editar información de registros de la base de datos, ingresando el identificador del punto a editar, agregando los datos nuevos que tendrá el registro y seleccionando en el mapa la nueva localización del taller. Finalmente, con el boton de guardar se realiza el envio de la información
+                En esta sección usted podrá editar información de registros de la base de datos, ingresando el identificador del punto a editar, agregando los datos nuevos que tendrá el registro y seleccionando en el mapa la nueva localización del taller. Finalmente, con el botón de guardar se realiza el envío de la información
             </p>
 
             <!-- Botón de iniciar edición  -->
@@ -283,7 +283,7 @@
         <a href="sesion.html" class="item-link active" id="pageLink">
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
-        <a href="manual.html" class="item-link" id="pageLink2">
+        <a href="manualuser.html" class="item-link" id="pageLink2">
           <img src="img/file-text.svg" style="opacity: 0.3; height: 2rem" title="Manual">
         </a>
         

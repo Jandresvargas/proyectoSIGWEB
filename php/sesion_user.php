@@ -21,7 +21,7 @@ $result = pg_query($conn, $query);
 if (pg_num_rows($result) > 0) {
     // Usuario autenticado correctamente
     $_SESSION['username'] = $username;
-    header("Location: ../principal.html"); // Redirige a la página de inicio después del inicio de sesión exitoso
+    header("Location: ../principaluser.php"); // Redirige a la página de inicio después del inicio de sesión exitoso
     exit;
 } else {
     // Credenciales incorrectas
