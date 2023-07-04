@@ -3,12 +3,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Obtener los datos enviados por el formulario
   $id = $_POST['id'];
   $nombre = $_POST['nombre'];
-  $tipo = $_POST['tipo'];
+  $categoria = $_POST['categoria'];
+  $rating = $_POST['rating'];
+  $servicio1 = $_POST['servicio1'];
+  $servicio2 = $_POST['servicio2'];
+  $servicio3 = $_POST['servicio3'];
+  $direccion = $_POST['direccion'];
+  $web = $_POST['web'];
+  $telefono = $_POST['telefono'];
+  $propietario = $_POST['propietario'];
   $latitude = $_POST['latitude'];
   $longitude = $_POST['longitude'];
 
   // Crear la conexión a la base de datos
-  define("PG_DB"  , "t2p");
+  define("PG_DB"  , "Proyecto_SIGWEB");
   define("PG_HOST", "localhost");
   define("PG_USER", "postgres");
   define("PG_PSWD", "12345");
@@ -24,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $point = "POINT($longitude $latitude)";
 
   // Insertar los datos del punto en la base de datos
-  $query = "INSERT INTO sitios_interes (id, nombre, tipo, geom) VALUES ('$id','$nombre','$tipo', ST_GeomFromText('$point', 4326))";
+  $query = "INSERT INTO talleres (id, nombre, categoria, rating, servicio1, servicio2, servicio3, direccion, web, telefono, propietario, geom) VALUES ('$id','$nombre','$categoria', '$rating', '$servicio1', '$servicio2', '$servicio3', '$direccion', '$web', '$telefono', '$propietario', ST_GeomFromText('$point', 4326))";
   $result = pg_query($conn, $query);
 
   // Verificar el resultado de la consulta

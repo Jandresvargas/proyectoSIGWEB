@@ -62,7 +62,7 @@
           </svg>
         </button>
         <div class="app-name">SIG</div>
-        <a href="principal.html" class="item-link active" >
+        <a href="principalvisit.html" class="item-link active" >
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
         <a href="manual.html" class="item-link active">

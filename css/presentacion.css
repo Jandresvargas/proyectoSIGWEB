@@ -755,7 +755,7 @@ height: 350px;
 margin-right: 21px;
 padding: 21px;
 float: left;
-background-image: url(http://uploads.webflow.com/5317d67d660658b254000454/5349c1a4c983950e4d00001c_War-On-Drugs-The---Slave-Ambient.jpg);
+background-image: url("img/andres.JPG");
 background-size: cover;
 color: white;
 }
