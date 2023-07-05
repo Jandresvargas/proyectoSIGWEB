@@ -264,7 +264,7 @@
           <div class="leaflet-sidebar-pane" id="manual">
             <h1 class="leaflet-sidebar-header" style="font-family: 'DM Sans', sans-serif; font-size: 18px; text-align: justify">Manual<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
             <br>
-            <embed src="manual.pdf" type="application/pdf" width="100%" height="600px" />
+            <embed src="ManualUsuario.pdf" type="application/pdf" width="100%" height="600px" />
           </div>
       </div>
   </div>

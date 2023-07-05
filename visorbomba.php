@@ -228,7 +228,7 @@
             <h1 class="leaflet-sidebar-header" style="font-family: 'DM Sans', sans-serif; font-size: 18px; text-align: justify">Manual<span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span></h1>
             <br>
             <!-- Insertar manual -->
-            <embed src="manual.pdf" type="application/pdf" width="100%" height="600px" />
+            <embed src="ManualVisitante.pdf" type="application/pdf" width="100%" height="600px" />
           </div>
       </div>
   </div>
@@ -247,7 +247,7 @@
         <!-- Titulo -->
         <div class="app-name">SIG</div>
         <!-- Enlace a pagina principal -->
-        <a href="principalvisitante.html" class="item-link active" id="pageLink">
+        <a href="principalvisit.html" class="item-link active" id="pageLink">
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
         <!-- Enlace a manual -->
@@ -271,7 +271,7 @@
           <img src="img/tire.svg" style="opacity: 0.3; height: 2rem" title="Montallantas" >
         </a>
         <!-- SALIR -->
-        <a href="principal2.html">
+        <a href="principalvisit.html">
             <button id="btnSalir" class="btn-logout">
               <img src="img/log-out.svg" style="opacity: 0.3; height: 2rem" title="Salir">
             </button>

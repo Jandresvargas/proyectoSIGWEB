@@ -65,7 +65,7 @@
         <a href="principalvisit.html" class="item-link active" >
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
-        <a href="manual.html" class="item-link active">
+        <a href="manualvisit.html" class="item-link active">
           <img src="img/file-text.svg" style="opacity: 0.3; height: 2rem" title="Manual">
         </a>
         <a  class="item-link active">
