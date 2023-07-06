@@ -29,7 +29,7 @@
 
     <!-- Bootstrap -->
 
-    <link rel="stylesheet" href="css/principal.css">
+    <link rel="stylesheet" href="css/principal2.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--Plugin jQuery-->
     <script src="js/principal.js"></script>   
@@ -291,7 +291,7 @@
               <div class="download-item-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="">
                   <defs></defs>
-                  <a xlink:href="presentacion.html">
+                  <a xlink:href="presentacion.html" target="_blank">
                     <circle cx="256" cy="256" r="256" fill="#4b50dd"></circle>
                     <path fill="#f5f5f5" d="M192 64h176c4.4 0 8 3.6 8 8v328c0 4.4-3.6 8-8 8H120c-4.4 0-8-3.6-8-8V148l80-84z"></path>
                     <path fill="#e6e6e6" d="M184 148c4.4 0 8-3.6 8-8V64l-80 84h72z"></path>

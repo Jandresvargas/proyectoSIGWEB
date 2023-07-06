@@ -247,7 +247,7 @@
         <!-- Titulo -->
         <div class="app-name">SIG</div>
         <!-- Enlace a pagina principal -->
-        <a href="principalvisitante.html" class="item-link active" id="pageLink">
+        <a href="principalvisit.html" class="item-link active" id="pageLink">
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
         <!-- Enlace a manual -->
@@ -271,7 +271,7 @@
           <img src="img/tire.svg" style="opacity: 0.3; height: 2rem" title="Montallantas" >
         </a>
         <!-- SALIR -->
-        <a href="principalvisit.html">
+        <a href="index.html">
             <button id="btnSalir" class="btn-logout">
               <img src="img/log-out.svg" style="opacity: 0.3; height: 2rem" title="Salir">
             </button>

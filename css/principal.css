@@ -453,10 +453,7 @@ a { text-decoration: none; cursor: pointer; }
   flex-shrink: 0;
 }
 
-.right-area {
-  padding: 24px;
-  overflow: auto;
-}
+
 
 .right-area-header {
   &-wrapper {
