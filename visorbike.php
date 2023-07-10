@@ -28,6 +28,7 @@
     <!-- iconos redes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Visor</title>
+    <link rel="icon" href="img/puntos.png">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="css/routepanel.css">
       <!-- Google Maps API -->

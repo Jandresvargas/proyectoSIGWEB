@@ -24,18 +24,21 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
     <!-- iconos redes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- Titulo e icono -->
     <title>Ingresar</title>
+    <link rel="icon" href="img/puntos.png">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-    <!-- Bootstrap -->
-
+    <!-- Estilo de pagina -->
     <link rel="stylesheet" href="css/principal2.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--Plugin jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Js pagina -->
     <script src="js/principal.js"></script>   
+    <!-- Graficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <style>
+    /* Estilo mapa y graficos*/
     #map {
       height: 400px;     
         }
@@ -48,11 +51,10 @@
       height: 300px;
     }
   </style>
-  
-  
   <body>
-
+    <!-- Contenedor principal -->
     <div class="app-container">
+      <!-- Definicion de panel izquierdo -->
       <div class="left-area">
         <button class="btn-close-left">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-x-circle" viewBox="0 0 24 24">
@@ -62,6 +64,7 @@
           </svg>
         </button>
         <div class="app-name">SIG</div>
+        <!-- Menú de navegación -->
         <a href="principalvisit.html" class="item-link active" >
           <img src="img/arrow-left-circle.svg" style="opacity: 0.3; height: 2rem" title="Pagina principal">
         </a>
@@ -92,7 +95,6 @@
           <br>
           <div class="resultado" style="font-size: 25;">
             <?php
-
               $query = "SELECT COUNT(*) AS total_talleres FROM talleres";
               $result = pg_query($conn, $query);
 
@@ -117,23 +119,18 @@
                 $categorias = array();
                 $conteos = array();
                 $colores = array();
-
                 // Definir un array de colores (uno por cada categoría)
                 $colores = array('#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF');
-
                 // Recorrer los resultados y almacenar los datos en los arreglos
                 $i = 0;
                 while ($row = pg_fetch_assoc($result)) {
                     $categoria = $row['categoria'];
                     $conteo = $row['total'];
-
                     array_push($categorias, $categoria);
                     array_push($conteos, $conteo);
-
                     // Obtener el color correspondiente según el índice del arreglo
                     $color = $colores[$i % count($colores)];
                     array_push($colores, $color);
-
                     $i++;
                 }
             ?>
@@ -174,21 +171,16 @@
           <div class="content-section" style="align-items: center; align-content: center;"> 
             <?php
               // Conexión a la base de datos
-              
-
               $conn = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER ." password=".PG_PSWD." port=".PG_PORT."");
               if (!$conn) {
                   echo "Error de conexión a la base de datos.";
                   exit;
               }
-
               // Consulta SQL para obtener el conteo de talleres por comuna
               $query = "SELECT c.nombre AS comuna, COUNT(t.*) AS total_talleres FROM comunas c LEFT JOIN talleres t ON ST_Intersects(t.geom, c.geom) GROUP BY c.nombre ORDER BY c.nombre";
               $result = pg_query($conn, $query);
-
               $comunas = array();
               $cantidades = array();
-
               if ($result) {
                   while ($row = pg_fetch_assoc($result)) {
                       $comunas[] = $row['comuna'];
@@ -198,16 +190,13 @@
                   echo "Error al realizar la consulta.";
               }
               ?>
-
               <div style="width: 500px; align-items: center; align-content: center; padding-left:50px">
                   <canvas id="chart"></canvas>
               </div>
-
               <script>
                   // Datos para el gráfico
                   var comunas = <?php echo json_encode($comunas); ?>;
                   var cantidades = <?php echo json_encode($cantidades); ?>;
-                  
                   // Crear el gráfico
                   var ctx = document.getElementById('chart').getContext('2d');
                   var chart = new Chart(ctx, {
